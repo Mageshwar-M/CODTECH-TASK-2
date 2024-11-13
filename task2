@@ -1,0 +1,26 @@
+def calculate_average(grades):
+    return sum(grades) / len(grades) if grades else 0
+
+def get_letter_grade(avg):
+    return 'A' if avg >= 90 else 'B' if avg >= 80 else 'C' if avg >= 70 else 'D' if avg >= 60 else 'F'
+
+def get_gpa(letter):
+    return {'A': 4.0, 'B': 3.0, 'C': 2.0, 'D': 1.0, 'F': 0.0}[letter]
+
+def grade_tracker():
+    subjects = {}
+    while (subject := input("Enter subject (or 'done' to finish): ")) != 'done':
+        try:
+            subjects[subject] = float(input(f"Enter grade for {subject}: "))
+        except ValueError:
+            print("Please enter a valid number.")
+    
+    grades = list(subjects.values())
+    avg = calculate_average(grades)
+    letter = get_letter_grade(avg)
+    print("\n--- Grade Summary ---")
+    for s, g in subjects.items():
+        print(f"{s}: {g}")
+    print(f"Average: {avg:.2f}, Letter Grade: {letter}, GPA: {get_gpa(letter):.2f}")
+
+grade_tracker()
